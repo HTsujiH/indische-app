@@ -1,12 +1,16 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Indische Sprüche - Digital Workspace</title>
+
   <link rel="manifest" href="manifest.json" />
   <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png" />
   <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet" />
+
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
@@ -16,58 +20,65 @@
       });
     }
   </script>
+
   <script>
+    const iastToDevanagariMap = {
+      "ai":"ऐ","au":"औ","ā":"आ","a":"अ","ī":"ई","i":"इ","ū":"ऊ","u":"उ","ṛ":"ऋ","ṝ":"ॠ","ḷ":"ऌ","ḹ":"ॡ",
+      "e":"ए","o":"ओ","k":"क","kh":"ख","g":"ग","gh":"घ","ṅ":"ङ","c":"च","ch":"छ","j":"ज","jh":"झ","ñ":"ञ",
+      "ṭ":"ट","ṭh":"ठ","ḍ":"ड","ḍh":"ढ","ṇ":"ण","t":"त","th":"थ","d":"द","dh":"ध","n":"न",
+      "p":"प","ph":"फ","b":"ब","bh":"भ","m":"म","y":"य","r":"र","l":"ल","v":"व",
+      "ś":"श","ṣ":"ष","s":"स","h":"ह","ṃ":"ं","ḥ":"ः","'":"ऽ",".":"।",",":","," ":" "
+    };
+
+    function transliterateIAST(input) {
+      const sortedKeys = Object.keys(iastToDevanagariMap).sort((a, b) => b.length - a.length);
+      let output = '';
+      let i = 0;
+      while (i < input.length) {
+        let matched = false;
+        for (let key of sortedKeys) {
+          if (input.substring(i, i + key.length) === key) {
+            output += iastToDevanagariMap[key];
+            i += key.length;
+            matched = true;
+            break;
+          }
+        }
+        if (!matched) {
+          output += input[i];
+          i++;
+        }
+      }
+      return output;
+    }
+
     document.addEventListener('DOMContentLoaded', function () {
       const romanInput = document.getElementById('romanText');
       const devInput = document.getElementById('devanagariText');
-
-      romanInput.addEventListener('input', function () {
-        const map = {
-          "ā": "आ", "a": "अ", "ī": "ई", "i": "इ", "ū": "ऊ", "u": "उ", "ṛ": "ऋ", "ṝ": "ॠ",
-          "ḷ": "ऌ", "ḹ": "ॡ", "e": "ए", "ai": "ऐ", "o": "ओ", "au": "औ",
-          "k": "क", "kh": "ख", "g": "ग", "gh": "घ", "ṅ": "ङ", "c": "च", "ch": "छ",
-          "j": "ज", "jh": "झ", "ñ": "ञ", "ṭ": "ट", "ṭh": "ठ", "ḍ": "ड", "ḍh": "ढ",
-          "ṇ": "ण", "t": "त", "th": "थ", "d": "द", "dh": "ध", "n": "न", "p": "प", "ph": "फ",
-          "b": "ब", "bh": "भ", "m": "म", "y": "य", "r": "र", "l": "ल", "v": "व",
-          "ś": "श", "ṣ": "ष", "s": "स", "h": "ह", "ṃ": "ं", "ḥ": "ः", "'": "ऽ", ".": "।", " ": " "
-        };
-        const keys = Object.keys(map).sort((a, b) => b.length - a.length);
-        let output = '';
-        let i = 0;
-        const input = romanInput.value.toLowerCase();
-        while (i < input.length) {
-          let matched = false;
-          for (const k of keys) {
-            if (input.substring(i, i + k.length) === k) {
-              output += map[k];
-              i += k.length;
-              matched = true;
-              break;
-            }
-          }
-          if (!matched) {
-            output += input[i];
-            i++;
-          }
-        }
-        devInput.value = output;
-      });
+      if (romanInput && devInput) {
+        romanInput.addEventListener('input', function () {
+          const iast = romanInput.value.toLowerCase();
+          const devText = transliterateIAST(iast);
+          devInput.value = devText;
+        });
+      }
     });
   </script>
-  <style>
-    body { font-family: 'Georgia', serif; padding: 20px; max-width: 800px; margin: auto; }
-    textarea, input { width: 100%; margin: 10px 0; padding: 8px; }
-    .devanagari { font-family: 'Noto Sans Devanagari', serif; font-size: 1.4em; }
-  </style>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <h1>इन्दिश्च स्प्रूछे / Indische Sprüche</h1>
-  <form>
-    <label for="romanText">Roman (IAST):</label>
-    <textarea id="romanText" rows="3" placeholder="e.g. satyam eva jayate"></textarea>
-    <label for="devanagariText">Devanagari:</label>
-    <textarea id="devanagariText" class="devanagari" rows="3" readonly></textarea>
-  </form>
+  <div style="padding: 20px; font-family: Georgia, serif;">
+    <h1>इन्दिश्च स्प्रूछे / Indische Sprüche</h1>
+    <p>Enter text in IAST below. It will automatically convert to Devanagari:</p>
+
+    <div>
+      <label for="romanText"><strong>IAST Input:</strong></label><br />
+      <textarea id="romanText" rows="3" style="width:100%; font-size:1.2em;"></textarea>
+    </div>
+    <br />
+    <div>
+      <label for="devanagariText"><strong>Devanāgarī Output:</strong></label><br />
+      <textarea id="devanagariText" rows="3" style="width:100%; font-family: 'Noto Sans Devanagari', sans-serif; font-size:1.4em;"></textarea>
+    </div>
+  </div>
 </body>
 </html>
