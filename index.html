@@ -1,84 +1,174 @@
-
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Indische Sprüche - Digital Workspace</title>
-
-  <link rel="manifest" href="manifest.json" />
-  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png" />
-  <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png" />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet" />
-
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('service-worker.js')
-          .then(reg => console.log('Service Worker registered:', reg.scope))
-          .catch(err => console.error('Service Worker registration failed:', err));
-      });
-    }
-  </script>
-
-  <script>
-    const iastToDevanagariMap = {
-      "ai":"ऐ","au":"औ","ā":"आ","a":"अ","ī":"ई","i":"इ","ū":"ऊ","u":"उ","ṛ":"ऋ","ṝ":"ॠ","ḷ":"ऌ","ḹ":"ॡ",
-      "e":"ए","o":"ओ","k":"क","kh":"ख","g":"ग","gh":"घ","ṅ":"ङ","c":"च","ch":"छ","j":"ज","jh":"झ","ñ":"ञ",
-      "ṭ":"ट","ṭh":"ठ","ḍ":"ड","ḍh":"ढ","ṇ":"ण","t":"त","th":"थ","d":"द","dh":"ध","n":"न",
-      "p":"प","ph":"फ","b":"ब","bh":"भ","m":"म","y":"य","r":"र","l":"ल","v":"व",
-      "ś":"श","ṣ":"ष","s":"स","h":"ह","ṃ":"ं","ḥ":"ः","'":"ऽ",".":"।",",":","," ":" "
-    };
-
-    function transliterateIAST(input) {
-      const sortedKeys = Object.keys(iastToDevanagariMap).sort((a, b) => b.length - a.length);
-      let output = '';
-      let i = 0;
-      while (i < input.length) {
-        let matched = false;
-        for (let key of sortedKeys) {
-          if (input.substring(i, i + key.length) === key) {
-            output += iastToDevanagariMap[key];
-            i += key.length;
-            matched = true;
-            break;
-          }
-        }
-        if (!matched) {
-          output += input[i];
-          i++;
-        }
-      }
-      return output;
-    }
-
-    document.addEventListener('DOMContentLoaded', function () {
-      const romanInput = document.getElementById('romanText');
-      const devInput = document.getElementById('devanagariText');
-      if (romanInput && devInput) {
-        romanInput.addEventListener('input', function () {
-          const iast = romanInput.value.toLowerCase();
-          const devText = transliterateIAST(iast);
-          devInput.value = devText;
-        });
-      }
-    });
-  </script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2487.4">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
 </head>
 <body>
-  <div style="padding: 20px; font-family: Georgia, serif;">
-    <h1>इन्दिश्च स्प्रूछे / Indische Sprüche</h1>
-    <p>Enter text in IAST below. It will automatically convert to Devanagari:</p>
-
-    <div>
-      <label for="romanText"><strong>IAST Input:</strong></label><br />
-      <textarea id="romanText" rows="3" style="width:100%; font-size:1.2em;"></textarea>
-    </div>
-    <br />
-    <div>
-      <label for="devanagariText"><strong>Devanāgarī Output:</strong></label><br />
-      <textarea id="devanagariText" rows="3" style="width:100%; font-family: 'Noto Sans Devanagari', sans-serif; font-size:1.4em;"></textarea>
-    </div>
-  </div>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="en"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta charset="UTF-8" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;title&gt;Indische Sprüche – Digital Workspace&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- PWA --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;link rel="manifest" href="manifest.json" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;link rel="icon" type="image/png" sizes="192x192" href="icon-192.png" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;link rel="apple-touch-icon" sizes="512x512" href="icon-512.png" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if ('serviceWorker' in navigator) {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>window.addEventListener('load', () =&gt; navigator.serviceWorker.register('service-worker.js'));</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- Fonts --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700&amp;family=Noto+Sans+JP:wght@400;700&amp;display=swap" rel="stylesheet" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- Aksharamukha (IAST→Devanāgarī) --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;script src="https://cdn.jsdelivr.net/npm/aksharamukha@2.0.2/dist/aksharamukha.min.js"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>body{margin:0;font-family:Georgia,serif;background:#1e3c72;color:#fff;min-height:100vh;display:flex;flex-direction:column}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>h1{text-align:center;margin:20px 0}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.container{flex:1 0 auto;background:#fff;color:#333;border-radius:12px;margin:20px;padding:20px;max-width:1200px;width:100%;box-shadow:0 4px 12px rgba(0,0,0,.2)}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>textarea,input{width:100%;padding:8px;margin:4px 0;font-size:1em;}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.btn{padding:8px 16px;margin:4px;border:none;border-radius:4px;cursor:pointer;font-weight:bold}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.primary{background:#1e3c72;color:#fff}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.secondary{background:#6c757d;color:#fff}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.success{background:#28a745;color:#fff}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.workspace{display:flex;gap:20px;flex-wrap:wrap}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.panel{flex:1 1 45%;background:#f8f9fa;padding:16px;border-radius:8px}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.panel h2{margin-top:0}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.dev{font-family:'Noto Sans Devanagari',serif;font-size:1.3em}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>#verseContainer{max-height:400px;overflow:auto;padding:8px;border:1px solid #dee2e6;border-radius:6px}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.verseCard{padding:6px;border-bottom:1px solid #ccc}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>@media(max-width:800px){.panel{flex:1 1 100%}}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;h1&gt;इन्दिश्च स्प्रूछे / Indische Sprüche&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="container"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="workspace"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;!-- Input Panel --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="panel"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;h2&gt;✏️Verse Input&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;form id="verseForm"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label&gt;ID (1‑7613)&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;input type="number" id="verseId" min="1" max="7613" required /&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label&gt;IAST&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;textarea id="iast" rows="2"&gt;&lt;/textarea&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label&gt;Devanāgarī&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;textarea id="dev" class="dev" rows="2" readonly&gt;&lt;/textarea&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label&gt;German&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;textarea id="de" rows="2"&gt;&lt;/textarea&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label&gt;Japanese&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;textarea id="ja" rows="2"&gt;&lt;/textarea&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label&gt;Notes&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;textarea id="notes" rows="2"&gt;&lt;/textarea&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;button class="btn primary" type="submit"&gt;💾 Save&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;button class="btn secondary" type="button" id="prev"&gt;← Prev&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;button class="btn secondary" type="button" id="next"&gt;Next →&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;button class="btn secondary" type="button" id="rand"&gt;Random&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/form&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;!-- Search Panel --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="panel"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;h2&gt;🔍 Search&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;input id="searchInput" placeholder="search in any field" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button class="btn success" id="searchBtn"&gt;Search&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="verseContainer"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Data store (IndexedDB wrapper for persistence)</p>
+<p class="p1"><span class="Apple-converted-space">    </span>let db;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const openReq = indexedDB.open('sprucheDB',1);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>openReq.onupgradeneeded = e =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>db = e.target.result;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const store = db.createObjectStore('verses',{keyPath:'id'});</p>
+<p class="p1"><span class="Apple-converted-space">      </span>store.createIndex('text','iast',{unique:false});</p>
+<p class="p1"><span class="Apple-converted-space">    </span>};</p>
+<p class="p1"><span class="Apple-converted-space">    </span>openReq.onsuccess = e =&gt; {db = e.target.result; loadVerse(1);} ;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Elements</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const iastEl = document.getElementById('iast');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const devEl<span class="Apple-converted-space">  </span>= document.getElementById('dev');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Real‑time transliteration via Aksharamukha</p>
+<p class="p1"><span class="Apple-converted-space">    </span>iastEl.addEventListener('input', ()=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">      </span>devEl.value = Aksharamukha.convert('IAST','Devanagari',iastEl.value.trim());</p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Save verse</p>
+<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById('verseForm').addEventListener('submit',e=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">      </span>e.preventDefault();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const verse = {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>id: Number(document.getElementById('verseId').value),</p>
+<p class="p1"><span class="Apple-converted-space">        </span>iast:iastEl.value.trim(),</p>
+<p class="p1"><span class="Apple-converted-space">        </span>dev:devEl.value.trim(),</p>
+<p class="p1"><span class="Apple-converted-space">        </span>de:document.getElementById('de').value.trim(),</p>
+<p class="p1"><span class="Apple-converted-space">        </span>ja:document.getElementById('ja').value.trim(),</p>
+<p class="p1"><span class="Apple-converted-space">        </span>notes:document.getElementById('notes').value.trim()</p>
+<p class="p1"><span class="Apple-converted-space">      </span>};</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const tx = db.transaction('verses','readwrite');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>tx.objectStore('verses').put(verse);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>alert('Saved verse '+verse.id);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Navigation helpers</p>
+<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById('prev').onclick = ()=&gt;jump(-1);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById('next').onclick = ()=&gt;jump(1);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById('rand').onclick = ()=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">      </span>loadVerse(Math.floor(Math.random()*7613)+1);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>};</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function jump(delta){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const id = Number(document.getElementById('verseId').value)||1;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>loadVerse(Math.max(1,Math.min(7613,id+delta)));</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function loadVerse(id){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const tx = db.transaction('verses');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const req = tx.objectStore('verses').get(id);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>req.onsuccess = () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const v=req.result||{id, iast:'',dev:'',de:'',ja:'',notes:''};</p>
+<p class="p1"><span class="Apple-converted-space">        </span>document.getElementById('verseId').value=v.id;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>iastEl.value=v.iast; devEl.value=v.dev;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>document.getElementById('de').value=v.de;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>document.getElementById('ja').value=v.ja;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>document.getElementById('notes').value=v.notes;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>};</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Search</p>
+<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById('searchBtn').onclick = ()=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const term=document.getElementById('searchInput').value.toLowerCase();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const list=[];</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const tx=db.transaction('verses');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>tx.objectStore('verses').openCursor().onsuccess=e=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const c=e.target.result; if(!c)return render(list);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const v=c.value;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const all=(v.iast+v.dev+v.de+v.ja+v.notes).toLowerCase();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>if(all.includes(term)) list.push(v);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>c.continue();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>};</p>
+<p class="p1"><span class="Apple-converted-space">    </span>};</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function render(arr){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const cont=document.getElementById('verseContainer');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>cont.innerHTML= arr.length? arr.map(v=&gt;`&lt;div class='verseCard'&gt;&lt;strong&gt;${v.id}&lt;/strong&gt; ${v.dev||v.iast}&lt;/div&gt;`).join('') : '&lt;p&gt;No match&lt;/p&gt;';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
 </body>
 </html>
